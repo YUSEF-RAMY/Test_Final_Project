@@ -13,23 +13,26 @@ void main() {
 class EyeApp extends StatelessWidget {
   const EyeApp({super.key});
 
+  static late String token;
+  static String baseUrl = 'https://f0001fc6040b.ngrok-free.app';
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        child: MaterialApp(
-          routes: {
-            LoginScreen.id: (context) => LoginScreen(),
-            SignUpScreen.id: (context) => SignUpScreen(),
-            WelcomeScreen.id: (context) => WelcomeScreen(),
-            HomeScreen.id: (context) => HomeScreen(),
-            OnboardingScreen.id: (context) => OnboardingScreen(),
-          },
-          debugShowCheckedModeBanner: false,
-          initialRoute: LoginScreen.id,
-        ),
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MaterialApp(
+        routes: {
+          LoginScreen.id: (context) => LoginScreen(),
+          SignUpScreen.id: (context) => SignUpScreen(),
+          WelcomeScreen.id: (context) => WelcomeScreen(),
+          HomeScreen.id: (context) => HomeScreen(),
+          OnboardingScreen.id: (context) => OnboardingScreen(),
+        },
+        debugShowCheckedModeBanner: false,
+        initialRoute: LoginScreen.id,
+      ),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'dart:developer';
-
 import 'package:eye_app/data/model/signup_model.dart';
 import 'package:eye_app/presentation/screens/welcome_screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import '../../../data/request/signup_request.dart';
+import '../../../main.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../resources/color_manager.dart';
@@ -14,7 +14,6 @@ class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
 
   static String id = 'SignUpScreen';
-  static late String token;
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -76,8 +75,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   password: passwordController.text,
                 );
                 String oldToken = await signupRequest.signupRequest(signupModel);
-                SignUpScreen.token = oldToken.split('|').last;
-                log(SignUpScreen.token);
+                EyeApp.token = oldToken.split('|').last;
+                log(EyeApp.token);
                 if (SignupRequest.success == true) {
                   Navigator.pushReplacementNamed(context, WelcomeScreen.id);
                 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:eye_app/data/model/signup_response_model.dart';
+import 'package:eye_app/main.dart';
 import '../model/signup_model.dart';
 
 class SignupRequest {
@@ -12,14 +13,13 @@ class SignupRequest {
       receiveTimeout: const Duration(seconds: 10),//الوقت المسموح لارجاع النتائج*/
     ),
   );
-  String baseUrl = 'https://70523df67e2d.ngrok-free.app';
   SignupResponseModel? signupResponseModel;
   static late bool success;
 
   Future<String> signupRequest(SignupModel request) async {
     try {
       final response = await _dio.post(
-        "$baseUrl/api/register",
+        "${EyeApp.baseUrl}/api/register",
         options: Options(
           headers: {
             "Accept": "application/json", // token

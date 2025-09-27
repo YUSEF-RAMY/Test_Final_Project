@@ -1,11 +1,11 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:eye_app/data/model/login_response_model.dart';
+import 'package:eye_app/main.dart';
 import '../model/login_model.dart';
 
 class LoginRequest {
   final Dio _dio;
-  String baseUrl = 'https://70523df67e2d.ngrok-free.app';
   static late bool success;
   LoginResponseModel? loginResponseModel;
 
@@ -14,7 +14,7 @@ class LoginRequest {
   Future<String> loginRequest(LoginModel request) async {
     try {
       final response = await _dio.post(
-        "$baseUrl/api/login",
+        "${EyeApp.baseUrl}/api/login",
         options: Options(
           headers: {
             "Accept": "application/json", // token

@@ -1,34 +1,38 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:eye_app/main.dart';
 
 Future<void> UploadImageRequest({required File imageFile}) async {
   final dio = Dio();
 
   try {
-    //String fileName = imageFile.path.split('/').last;//للحصول على اسم الصوره
-
+    String fileName = imageFile.path.split('/').last; //للحصول على اسم الصوره
     FormData formData = FormData.fromMap({
-      "file": await MultipartFile.fromFile(imageFile.path),
+      "image": await MultipartFile.fromFile(
+        imageFile.path,
+        filename: fileName,
+      ),
     });
-
+    log(EyeApp.token);
     final response = await dio.post(
-      "https://example.com/upload_image", //  لينك الـ API
+      "${EyeApp.baseUrl}/api/scan",
       data: formData,
       options: Options(
         headers: {
-          "Authorization": "YOUR_TOKEN",
+          "Authorization": "Bearer ${EyeApp.token}",
+          "Accept": "application/json",
         },
       ),
     );
-
-    if (response.statusCode == 200) {
-      log("upload image successfully");
-      log(response.data);
+    log("Signup Success: ${response.data}");
+  } on DioException catch (e) {
+    if (e.response != null) {
+      log("Error: ${e.response?.statusCode} - ${e.response?.data}");
+      throw Exception(e.message);
     } else {
-      log(" error: ${response.statusCode}");
+      log("Error: ${e.message}");
+      throw Exception(e.message);
     }
-  } catch (e) {
-    log(" Exception: $e");
   }
 }

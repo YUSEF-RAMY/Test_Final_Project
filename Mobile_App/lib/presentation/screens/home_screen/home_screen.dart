@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:eye_app/main.dart';
 import 'package:eye_app/presentation/resources/color_manager.dart';
 import 'package:eye_app/presentation/resources/text_style_manager.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,8 @@ import '../../../data/request/upload_image_request.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static String id = 'HomeScreen';
 
+  static String id = 'HomeScreen';
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -56,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             GestureDetector(
               onTap: () async {
-                await pickImage(ImageSource.gallery);
+                await pickImage(ImageSource.camera);
+                log(EyeApp.token);
+                log(_image.path);
                 await UploadImageRequest(imageFile: _image);
               },
               child: Container(

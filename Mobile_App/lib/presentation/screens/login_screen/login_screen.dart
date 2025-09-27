@@ -4,6 +4,7 @@ import 'package:eye_app/data/model/login_model.dart';
 import 'package:eye_app/data/request/login_request.dart';
 import 'package:eye_app/presentation/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import '../../../main.dart';
 import '../../components/custom_button.dart';
 import '../../components/custom_text_field.dart';
 import '../../resources/color_manager.dart';
@@ -64,8 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   '${emailController.text} ,,,,,, ${passwordController.text}',
                 );
                 String oldToken = await loginRequest.loginRequest(loginModel);
-                SignUpScreen.token = oldToken.split('|').last;
-                log(SignUpScreen.token);
+                EyeApp.token = oldToken.split('|').last;
+                log(EyeApp.token);
                 if (LoginRequest.success == true) {
                   Navigator.pushReplacementNamed(context, HomeScreen.id);
                 }
